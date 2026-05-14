@@ -1,0 +1,97 @@
+DeepSeek V4 + Claude Code = экономия в 10 раз
+ 
+ views  
+May 12, 2026  #DeepSeek #DeepSeekV4 #DeepSeekPro
+⚡️Научу собирать мультиагентные AI-системы за 8 недель: https://www.nickvels-ai.ru/?utm_sourc...
+
+👉 Установщик DeepSeek в Claude Code одной командой, ссылки на все репозитории, готовые промпты и 10 пар "Claude рисует — DeepSeek строит" в ЗАКРЕПЕ моего Telegram-канала: https://t.me/+GRvEd5_7EIBkYTM5
+
+Тысячи разработчиков начали использовать DeepSeek V4 внутри своего Claude Code за последний месяц. Одна команда в терминале - и Claude перестаёт ловить рейт-лимиты, жечь токены пачками и умирать в середине рабочего дня. DeepSeek V4 - это модель с 1,5 триллионами параметров, которая бьёт Claude Sonnet 4.6 по бенчмаркам и встаёт прямо внутрь Claude Code за центы.
+
+ТАЙМКОДЫ:
+00:00 - Связка, которая снижает счёт за Claude в 5-10 раз
+00:32 - Что разберём в этом видео
+01:07 - Бонус: установщик и 10 готовых пар Claude + DeepSeek
+01:34 - История DeepSeek: от провала к лидеру бенчмарков
+02:04 - DeepSeek V4 обгоняет Claude Sonnet 4.6 по бенчмаркам
+02:40 - Цена токенов: $1.74/$3.48 vs $6.25/$25 у Opus 4.7
+02:50 - Разница в 5-10 раз: на чём именно экономишь
+03:39 - Репозиторий free-claude-code: что это и зачем
+04:47 - Архитектура: VS Code + два параллельных терминала
+05:47 - Opus как тим-лид, DeepSeek и TUI как исполнители
+05:57 - AI.Цех: программа на 8 недель и 6 блоков
+06:58 - Создаём API-ключ на platform.deepseek.com
+07:30 - Устанавливаем free-claude-code в VS Code
+09:42 - Запускаем clD DS и тестируем связку
+10:42 - Реальный кейс: ROI-калькулятор для сайта через DeepSeek
+13:18 - Результат: дизайн один в один со стилем сайта
+14:42 - DeepSeek TUI: что это и почему имеет смысл поставить
+15:01 - Установка DeepSeek TUI одной командой
+16:19 - Обзор DeepSeek TUI: команды, plan, tasks, MCP, скилы
+18:15 - Split Terminal в VS Code: Claude + DeepSeek одновременно
+18:48 - Настраиваем делегирование задач между моделями
+20:33 - Финальный результат: одна Bash-команда — две модели
+22:08 - Где забрать установщик и все материалы
+
+
+Материалы к ролику🔗
+
+Ссылка на репозиторий «free-claude-code»:
+https://github.com/Alishahryar1/free-claude-code
+
+Ссылка на репозиторий «DeepSeek-TUI»:
+https://github.com/Hmbown/DeepSeek-TUI
+
+Промпт:
+
+Установи free-claude-code (https://github.com/Alishahryar1/free-claude-code)
+и настрой работу через DeepSeek параллельно с обычным claude.
+
+1. Клонируй репо и поставь: uv tool install --force .
+2. Скопируй .env.example → .env, в нём:
+   - DEEPSEEK_API_KEY="<спроси у меня>"
+   - MODEL="deepseek/deepseek-v4-flash"
+   - MODEL_HAIKU=deepseek/deepseek-v4-flash
+   - MODEL_SONNET / MODEL_OPUS = deepseek/deepseek-v4-pro
+   - MESSAGING_PLATFORM="none", WHISPER_DEVICE="cpu"
+3. Запусти fcc-server в фоне (порт 8082).
+4. НЕ используй fcc-claude — OAuth токен из macOS keychain перебивает
+   токен прокси и возвращает 401. Создай ~/.local/bin/claude-ds:
+
+   #!/usr/bin/env bash
+   set -e
+   curl -sf http://127.0.0.1:8082/health >/dev/null || { echo "fcc-server не запущен"; exit 1; }
+   unset ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN ANTHROPIC_MODEL
+   export ANTHROPIC_API_KEY=freecc ANTHROPIC_BASE_URL=http://127.0.0.1:8082
+   exec claude --bare "$@"
+
+   chmod +x и протестируй: claude-ds -p "тест".
+
+Итог: claude — обычный OAuth, claude-ds — DeepSeek через прокси.
+Модели DeepSeek называются именно v4-flash / v4-pro, не deepseek-chat.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
